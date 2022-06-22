@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Car;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,10 +13,10 @@ class CarType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Car_name')
-            ->add('Car_brand')
-            ->add('Car_price')
-            ->add('Supplier')
+            ->add('Carname', TextType::class)
+            ->add('Carbrand',TextType::class)
+            ->add('Carprice',TextType::class)
+//            ->add('Supplier',TextType::class)
         ;
     }
 
