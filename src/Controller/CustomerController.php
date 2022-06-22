@@ -21,4 +21,18 @@ class CustomerController extends AbstractController
             'customers' => $customers
         ]);
     }
+    /**
+     * @Route("/customer/details/{id}", name="customer_details")
+     */
+    public
+    function detailsAction($id)
+    {
+        $customers = $this->getDoctrine()
+            ->getRepository(Customer::class)
+            ->find($id);
+
+        return $this->render('customer/details.html.twig', [
+            'customers' => $customers
+        ]);
+    }
 }
