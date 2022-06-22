@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Form\CarType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -51,5 +53,27 @@ class CarController extends AbstractController
         );
 
         return $this->redirectToRoute('car_list');
+    }
+    /**
+     * @Route("/car/edit/{id}", name="car_edit")
+     */
+    public function editAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $car = $em->getRepository(Car::class)->find($id);
+
+        $form = $this->createForm(CarType::class, $car);
+
+        if ($this->saveChanges($form, $request, $car)) {
+            $this->addFlash(
+                'notice',
+                'Edited Successful'
+            );
+            return $this->redirectToRoute('car_list');
+        }
+
+        return $this->render('car/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }
