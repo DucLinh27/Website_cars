@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Customer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,12 +10,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class CustomerController extends AbstractController
 {
     /**
-     * @Route("/customer", name="app_customer")
+     * @Route("/customer", name="customer_list")
      */
-    public function index(): Response
+    public function listAction()
     {
+        $customers = $this->getDoctrine()
+            ->getRepository(Customer::class)
+            ->findAll();
         return $this->render('customer/index.html.twig', [
-            'controller_name' => 'CustomerController',
+            'customers' => $customers
         ]);
     }
 }
