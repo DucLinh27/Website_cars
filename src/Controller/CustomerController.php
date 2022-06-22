@@ -96,4 +96,26 @@ class CustomerController extends AbstractController
         }
         return false;
     }
+    /**
+     * @Route("/customer/edit/{id}", name="customer_edit")
+     */
+    public function editAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $customer = $em->getRepository(Customer::class)->find($id);
+
+        $form = $this->createForm(CustomerType::class, $customer);
+
+        if ($this->saveChanges($form, $request, $customer)) {
+            $this->addFlash(
+                'notice',
+                'Edited Successful'
+            );
+            return $this->redirectToRoute('customer_list');
+        }
+
+        return $this->render('customer/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
