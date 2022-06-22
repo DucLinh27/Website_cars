@@ -35,4 +35,21 @@ class CustomerController extends AbstractController
             'customers' => $customers
         ]);
     }
+    /**
+     * @Route("/customer/delete/{id}", name="customer_delete")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $customer = $em->getRepository(Customer::class)->find($id);
+        $em->remove($customer);
+        $em->flush();
+
+        $this->addFlash(
+            'error',
+            'Deleted successful'
+        );
+
+        return $this->redirectToRoute('customer_list');
+    }
 }
