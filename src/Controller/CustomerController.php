@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Customer;
+use App\Form\CustomerType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -51,5 +54,46 @@ class CustomerController extends AbstractController
         );
 
         return $this->redirectToRoute('customer_list');
+    }
+    /**
+     * @Route("/customer/create", name="customer_create", methods={"GET","POST"})
+     */
+    public function createAction(Request $request)
+    {
+        $customer = new Customer();
+        $form = $this->createForm(CustomerType::class, $customer);
+
+        if ($this->saveChanges($form, $request, $customer)) {
+            $this->addFlash(
+                'notice',
+                'Added Successful'
+            );
+
+            return $this->redirectToRoute('customer_list');
+        }
+
+        return $this->render('customer/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function saveChanges($form, $request, $customer)
+    {
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $customer->setCustomername($request->request->get('customer')['Customername']);
+            $customer->setCustomermail($request->request->get('customer')['Customermail']);
+            $customer->setCustomerphone($request->request->get('customer')['Customerphone']);
+            $customer->setCustomeraddress($request->request->get('customer')['Customeraddress']);
+//            $car->setPriority($request->request->get('car')['priority']);
+//            $car->setDueDate(\DateTime::createFromFormat('Y-m-d', $request->request->get('todo')['due_date']));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($customer);
+            $em->flush();
+
+            return true;
+        }
+        return false;
     }
 }
