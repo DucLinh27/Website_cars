@@ -35,4 +35,21 @@ class CarController extends AbstractController
             'car' => $cars
         ]);
     }
+    /**
+     * @Route("/car/delete/{id}", name="car_delete")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $car = $em->getRepository(Car::class)->find($id);
+        $em->remove($car);
+        $em->flush();
+
+        $this->addFlash(
+            'error',
+            'Deleted successful'
+        );
+
+        return $this->redirectToRoute('car_list');
+    }
 }
