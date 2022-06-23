@@ -32,4 +32,21 @@ class SupplierController extends AbstractController
             'supplier' => $supplier
         ]);
     }
+    /**
+     * @Route("/supplier/delete/{id}", name="supplier_delete")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $supplier = $em->getRepository(Supplier::class)->find($id);
+        $em->remove($supplier);
+        $em->flush();
+
+        $this->addFlash(
+            'error',
+            'Deleted successful'
+        );
+
+        return $this->redirectToRoute('supplier_list');
+    }
 }
