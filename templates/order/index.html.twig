@@ -26,7 +26,7 @@
                         {#<a href="{{ path('todo_edit', {'id': todo.id}) }}" class='btn btn-default'>Edit</a>#}
                         {#<a href="{{ path('todo_delete', {'id': todo.id}) }}" class='btn btn-danger'>Delete</a>#}
                         <a href="{{ path('order_details' , {'id' : order.id}) }}" class='btn btn-success'>View</a>
-{#                        <a href="{{ path('order_edit' , {'id' : order.id}) }}" class='btn btn-default'>Edit</a>#}
+                        <a href="{{ path('order_edit' , {'id' : order.id}) }}" class='btn btn-default'>Edit</a>
                         <a href="{{ path('order_delete' , {'id' : order.id}) }}" class='btn btn-danger'>Delete</a>
                         {#                        <a href="{{ path('customer_create' , {'id' : customer.id}) }}" class='btn btn-danger'>Create</a>#}
                     </td>
@@ -36,11 +36,11 @@
         </table>
 
     </div>
-{#    <div id="navbar" class="collapse navbar-collapse">#}
-{#        <ul class="nav navbar-nav">#}
-{#            #}{#            <li class="active"><a href="{{ path('home_list') }}">Home</a></li>#}
-{#            #}{#<li><a href="{{ path('todo_create') }}">Add Todo</a></li>#}
-{#            <li><a href="{{ path('order_create') }}" >Create</a></li>#}
-{#        </ul>#}
-{#    </div><!--/.nav-collapse -->#}
+    <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+{#                        <li class="active"><a href="{{ path('home_list') }}">Home</a></li>#}
+{#            <li><a href="{{ path('todo_create') }}">Add Todo</a></li>#}
+            <li><a href="{{ path('order_create') }}" class="btn btn-primary" >Create</a></li>
+        </ul>
+    </div><!--/.nav-collapse -->
 {% endblock %}
