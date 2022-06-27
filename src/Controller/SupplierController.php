@@ -92,5 +92,27 @@ class SupplierController extends AbstractController
         }
         return false;
     }
+    /**
+     * @Route("/supplier/edit/{id}", name="supplier_edit")
+     */
+    public function editAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $supplier = $em->getRepository(Supplier::class)->find($id);
+
+        $form = $this->createForm(SupplierType::class, $supplier);
+
+        if ($this->saveChanges($form, $request, $supplier)) {
+            $this->addFlash(
+                'notice',
+                'Edited Successful'
+            );
+            return $this->redirectToRoute('supplier_list');
+        }
+
+        return $this->render('supplier/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
 
