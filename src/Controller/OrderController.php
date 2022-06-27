@@ -113,7 +113,7 @@ class OrderController extends AbstractController
                 'notice',
                 'Edited Successful'
             );
-            return $this->redirectToRoute('supplier_list');
+            return $this->redirectToRoute('order_list');
         }
 
         return $this->render('order/edit.html.twig', [
