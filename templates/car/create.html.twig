@@ -22,6 +22,10 @@
             }
         }) }}
     </div>
+    <form action="Upload.php" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+    </form>
     <div class="form-group">
         <label for="Carprice">Price :</label>
         {{ form_widget(form.Carprice,{
