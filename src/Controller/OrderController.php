@@ -98,5 +98,27 @@ class OrderController extends AbstractController
         }
         return false;
     }
+    /**
+     * @Route("/order/edit/{id}", name="order_edit")
+     */
+    public function editAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $supplier = $em->getRepository(Order::class)->find($id);
+
+        $form = $this->createForm(OrderType::class, $supplier);
+
+        if ($this->saveChanges($form, $request, $supplier)) {
+            $this->addFlash(
+                'notice',
+                'Edited Successful'
+            );
+            return $this->redirectToRoute('supplier_list');
+        }
+
+        return $this->render('order/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 
 }
