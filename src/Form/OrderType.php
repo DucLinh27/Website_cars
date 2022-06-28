@@ -14,7 +14,6 @@ class OrderType extends AbstractType
     {
         $builder
             ->add('Discount',TextType::class)
-
         ;
     }
 
