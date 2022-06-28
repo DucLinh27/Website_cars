@@ -16,7 +16,6 @@ class CarType extends AbstractType
             ->add('Carname', TextType::class)
             ->add('Carbrand',TextType::class)
             ->add('Carprice',TextType::class)
-//            ->add('Supplier',TextType::class)
         ;
     }
 
