@@ -86,8 +86,6 @@ class CustomerController extends AbstractController
             $customer->setCustomermail($request->request->get('customer')['Customermail']);
             $customer->setCustomerphone($request->request->get('customer')['Customerphone']);
             $customer->setCustomeraddress($request->request->get('customer')['Customeraddress']);
-//            $car->setPriority($request->request->get('car')['priority']);
-//            $car->setDueDate(\DateTime::createFromFormat('Y-m-d', $request->request->get('todo')['due_date']));
             $em = $this->getDoctrine()->getManager();
             $em->persist($customer);
             $em->flush();

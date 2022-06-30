@@ -103,12 +103,9 @@ class CarController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $car->setid($request->request->get('car')['id']);
             $car->setCarname($request->request->get('car')['Carname']);
             $car->setCarbrand($request->request->get('car')['Carbrand']);
             $car->setCarprice($request->request->get('car')['Carprice']);
-//            $car->setPriority($request->request->get('car')['priority']);
-//            $car->setDueDate(\DateTime::createFromFormat('Y-m-d', $request->request->get('todo')['due_date']));
             $em = $this->getDoctrine()->getManager();
             $em->persist($car);
             $em->flush();

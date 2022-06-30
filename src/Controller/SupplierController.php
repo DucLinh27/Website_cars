@@ -78,12 +78,6 @@ class SupplierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $supplier->setSupplierID($request->request->get('supplier')['supplierID']);
-//            $supplier->setSuppliername($request->request->get('supplier')['Suppliername']);
-//            $supplier->setPhonenumber($request->request->get('supplier')['Phonenumber']);
-//            $supplier->setAddress($request->request->get('supplier')['Address']);
-//            $car->setPriority($request->request->get('car')['priority']);
-//            $car->setDueDate(\DateTime::createFromFormat('Y-m-d', $request->request->get('todo')['due_date']));
             $em = $this->getDoctrine()->getManager();
             $em->persist($supplier);
             $em->flush();

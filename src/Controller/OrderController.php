@@ -81,15 +81,7 @@ class OrderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-//            $order->setOrderID($request->request->get('order')['OrderID']);
             $order->setDiscount($request->request->get('order')['Discount']);
-//            $order->setDateOrder(\DateTime::createFromFormat('Y-m-d', $request->request->get('order')['DateOrder']));
-//            $todo->setDueDate(\DateTime::createFromFormat('Y-m-d', $request->request->get('todo')['due_date']));
-//            $order->setPhonenumber($request->request->get('order')['Phonenumber']);
-//            $order->setAddress($request->request->get('order')['Address']);
-//            $car->setPriority($request->request->get('car')['priority']);
-//            $car->setDueDate(\DateTime::createFromFormat('Y-m-d', $request->request->get('todo')['due_date']));
             $em = $this->getDoctrine()->getManager();
             $em->persist($order);
             $em->flush();

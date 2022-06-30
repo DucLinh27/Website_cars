@@ -24,6 +24,7 @@ class Supplier
      */
     private $Supplier_name;
 
+
     /**
      * @ORM\OneToMany(targetEntity=Car::class, mappedBy="Supplier")
      */
@@ -79,6 +80,9 @@ class Supplier
         }
 
         return $this;
+    }
+    public function __toString() {
+        return (string)$this->getId();
     }
 }
 
