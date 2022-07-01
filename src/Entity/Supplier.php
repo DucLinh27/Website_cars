@@ -82,7 +82,7 @@ class Supplier
         return $this;
     }
     public function __toString() {
-        return (string)$this->getId();
+        return (string)$this->getSupplierName();
     }
 }
 
